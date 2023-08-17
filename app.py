@@ -21,11 +21,11 @@ with st.sidebar:
     "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
 
 uploaded_file = st.file_uploader(
-    "Upload an article",
+    "上传文件，支持.txt和.md",
     type=("txt", "md"),
 )
 
-st.title("📝 File Q&A with OpenAI")
+st.title("基于ChatGPT的文档问答")
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
         {
@@ -39,11 +39,11 @@ for msg in st.session_state.messages:
 
 if prompt := st.chat_input():
     if not openai_api_key:
-        st.info("Please add your OpenAI API key to continue.")
+        st.info("请先添加OpenAI API Key.")
         st.stop()
 
     if not uploaded_file:
-        st.info("Please upload an article to continue.")
+        st.info("请先上传文档.")
         st.stop()
 
     article = uploaded_file.read().decode()
